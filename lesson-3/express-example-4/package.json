@@ -1,0 +1,23 @@
+{
+  "name": "express-example-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "keywords": [],
+  "author": "Akil Maryna",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "cros": "^1.0.1",
+    "express": "^4.18.2",
+    "moment": "^2.30.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
