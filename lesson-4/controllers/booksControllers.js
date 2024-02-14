@@ -6,7 +6,6 @@ import {
     updateById
 } from "../services/booksServices.js";
 import HttpError from "../helpers/HttpError.js";
-import { createBooksSchema } from "../schemas/booksSchemas.js";
 import { ctrlWrapper } from "../helpers/ctrlWrapper.js";
 
 const getAllBooks = async (req, res) => {
