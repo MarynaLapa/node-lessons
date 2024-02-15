@@ -49,6 +49,10 @@ export async function updateContactById(contactId, data) {
 
     const index = contacts.findIndex(el => el.id === contactId);
     if (index === -1) return null;
+ 
+    if (!data.hasOwnProperty('name')) data.name = contacts[index].name;
+    if (!data.hasOwnProperty('email')) data.email = contacts[index].email;
+    if (!data.hasOwnProperty('phone')) data.phone = contacts[index].phone;
     
     contacts[index] = { id: contactId, ...data };
 

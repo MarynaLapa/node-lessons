@@ -24,7 +24,6 @@ export const getOneContact = async (req, res) => {
 
 export const deleteContact = async(req, res) => {
     const { id } = req.params;
-    console.log('id', id)
     const result = await removeContact(id);
     console.log('result', result)
     if (!result) {
@@ -42,7 +41,9 @@ export const createContact = async (req, res) => {
 };
 
 export const updateContact = async (req, res) => {
+    console.log('req.params', req.params)
     const { id } = req.params;
+     
     const result = await updateContactById(id, req.body);
     if (!result) {
         throw HttpError(400)
