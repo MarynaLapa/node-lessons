@@ -2,12 +2,9 @@ import mongoose from "mongoose";
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import dotevn from 'dotenv';
 
 import contactsRouter from "./routes/contactsRouter.js";
 import booksRouter from "./routes/booksRouter.js" //
-
-console.log(dotevn.config()) 
 
 const app = express();
 
@@ -27,18 +24,4 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message });
 });
 
-const { DB_HOST } = process.env;
-
-mongoose.set('strictQuery', false);
-
-mongoose.connect(DB_HOST)
-  .then(() => {
-    app.listen(3000, () => {
-      console.log('Database connect success!');
-    });
-  })
-  .catch(error => {
-    console.log(error.message);
-    process.exit(1)
-  });
-
+export default app;
