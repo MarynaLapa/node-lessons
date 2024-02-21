@@ -1,5 +1,5 @@
 import Joi from 'joi';
-import { emailRegaxp } from '../models/user';
+import { emailRegaxp } from '../models/user.js';
 
 export const registerSchema = Joi.object({
     name: Joi.string().required(),

@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { handleMongooseError } from "../helpers/handleMongooseError";
+import { handleMongooseError } from "../helpers/handleMongooseError.js";
 
 export const emailRegaxp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -11,6 +11,7 @@ const userSchema = new Schema({
     email: {
         type: String,
         match: emailRegaxp,
+        unique: true,
         required: true,
     },
     password: {
