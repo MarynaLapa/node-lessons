@@ -11,7 +11,7 @@ router.get("/", authenticate, controllers.getAllBooks);
 
 router.get("/:id", authenticate, isValidId, controllers.getOneBook);
 
-router.post("/",authenticate, validateBody(createBooksSchema), controllers.createBook);
+router.post("/", authenticate, validateBody(createBooksSchema), controllers.createBook);
 
 router.put("/:id", authenticate, isValidId, validateBody(updateBooksSchema), controllers.updateBook);
 

@@ -32,9 +32,9 @@ const bookSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'user',
     }
-}, {versionKey: false, timestamps: true});
+}, { versionKey: false, timestamps: true });
 
-bookSchema.post("save", handleMongooseError)
+bookSchema.post("save", handleMongooseError);
 
 const Book = model("book", bookSchema);
 

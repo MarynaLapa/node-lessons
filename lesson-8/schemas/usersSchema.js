@@ -5,8 +5,7 @@ export const registerSchema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().email(emailRegaxp).required(),
     password: Joi.string().min(6).required(),
-    subscription: Joi.string().valid(subscriptionEnum),
-    token: Joi.string()
+    subscription: Joi.string().valid(...subscriptionEnum),
 });
 
 export const loginSchema = Joi.object({
@@ -15,5 +14,5 @@ export const loginSchema = Joi.object({
 })
 
 export const subscriptionSchema = Joi.object({
-    subscription: Joi.string().required(),
+    subscription: Joi.string().valid(...subscriptionEnum).required(),
 })

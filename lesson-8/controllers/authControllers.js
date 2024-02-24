@@ -20,13 +20,14 @@ const register = async (req, res) => {
 
     res.status(201).json({
         email: newUser.email,
-        password: newUser.password,
+        subscription: newUser.subscription,
     });
 };
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    const { subscription } = req.user;
+    // const { subscription } = req.user;
+    // console.log('subscription', req.user)
 
     const user = await User.findOne({ email });
 
@@ -43,14 +44,19 @@ const login = async (req, res) => {
     dotevn.config() 
     const { SECRET_KEY } = process.env;
 
-    const token = jwt.sign(user._id, SECRET_KEY, { expiresIn: "23h" }); 
+    const payload = {
+        id: user._id
+    }
+
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" }); 
+    
     await User.findByIdAndUpdate(user._id, { token });
 
     res.json({
         token,
         user: {
             email,
-            subscription
+            subscription //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDhjOTRhMzc0Zjk2ZDlmMWY4OTViMCIsImlhdCI6MTcwODcwNzgxMCwiZXhwIjoxNzA4NzkwNjEwfQ.qF3NslRyRI1rOtswrmDG_IgtodaQKzewlHykVY7PRvY
         }
     });
 }
@@ -69,14 +75,16 @@ const logout = async (req, res) => {
     await User.findByIdAndUpdate(_id, { token: "" });
 
     res.status(204).json({
-        // message: "No Content"
         message: "Logout success"
     });
 };
 
 const updateSubscription = async (req, res) => {
     const { id } = req.body;
-    const result = await User.findById(id, req.body, { new: true });
+
+    const result = await User.findByIdAndUpdate(req.body, { new: true });
+    console.log('result', result);
+
     if (!result) {
         throw HttpError(400);
     };
