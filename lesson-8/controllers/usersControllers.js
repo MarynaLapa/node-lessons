@@ -29,11 +29,7 @@ const deleteUser = async (req, res) => {
 
 const updateSubscription = async (req, res) => {
     const { id } = req.user;
-    console.log('id', id); 
-    console.log('req.body', req.body)
     const result = await User.findByIdAndUpdate(id, req.body, { new: true });
-    console.log('result', result);
-
     if (!result) {
         throw HttpError(400);
     };
