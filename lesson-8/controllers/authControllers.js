@@ -26,8 +26,6 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     const { email, password } = req.body;
-    // const { subscription } = req.user;
-    // console.log('subscription', req.user)
 
     const user = await User.findOne({ email });
 
@@ -56,7 +54,8 @@ const login = async (req, res) => {
         token,
         user: {
             email,
-            subscription //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDhjOTRhMzc0Zjk2ZDlmMWY4OTViMCIsImlhdCI6MTcwODcwNzgxMCwiZXhwIjoxNzA4NzkwNjEwfQ.qF3NslRyRI1rOtswrmDG_IgtodaQKzewlHykVY7PRvY
+            subscription: user.subscription
+            //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1ZDhjOTRhMzc0Zjk2ZDlmMWY4OTViMCIsImlhdCI6MTcwODc3MDM4MSwiZXhwIjoxNzA4ODUzMTgxfQ.T9T_LbKWVR681Db7p4MX5-_U0PdgE0p5WhzfL8X_vQQ
         }
     });
 }
@@ -79,25 +78,11 @@ const logout = async (req, res) => {
     });
 };
 
-const updateSubscription = async (req, res) => {
-    const { id } = req.body;
-
-    const result = await User.findByIdAndUpdate(req.body, { new: true });
-    console.log('result', result);
-
-    if (!result) {
-        throw HttpError(400);
-    };
-    res.json(result);
-}
-
-
 const controllers = {
     register: ctrlWrapper(register),
     login: ctrlWrapper(login),
     current: ctrlWrapper(current),
     logout: ctrlWrapper(logout),
-    updateSubscription: ctrlWrapper(updateSubscription),
 }
 
 export default controllers;
